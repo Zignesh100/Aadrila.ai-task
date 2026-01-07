@@ -1,17 +1,28 @@
 // Navigation bar component with logo, menu items, and CTA button
 import React from 'react';
+import { motion } from 'framer-motion';
 import logo from '../assets/logo.svg';
-const Navbar = () => {
+
+const Navbar = ({ showLogo, onLayoutComplete }) => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-[20px] border-b border-white/10">
       <div className="max-w-[1440px] mx-auto px-5 md:px-20 flex items-center justify-between h-[85px]">
         {/* Logo */}
         <div className="flex items-center">
-          <img 
-            src={logo}
-            alt="Aadrila.ai Logo" 
-            className="h-[50px] w-auto"
-          />
+        {showLogo && (
+            <motion.img
+              layoutId="logo"
+              src={logo}
+              alt="Aadrila.ai Logo"
+              className="h-[50px] w-auto"
+              // Smooth transition settings for the incoming logo
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 30
+              }}
+            />
+          )}
         </div>
 
         {/* Navigation Links */}
